@@ -17,7 +17,7 @@ function App() {
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
 
-  // Retrieve data from Firestore
+ 
   useEffect(() => {
     const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -30,7 +30,7 @@ function App() {
       );
     });
 
-    return () => unsubscribe(); // Cleanup subscription on component unmount
+    return () => unsubscribe(); 
   }, []);
 
   // Add new todo to Firestore
@@ -45,7 +45,7 @@ function App() {
     setInput('');
   };
 
-  // Update an existing todo
+  
   const updateTodo = async (id) => {
     if (input.trim() === '') return;
 
@@ -84,16 +84,16 @@ function App() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">ID</th>
+              <th scope="col">#</th> 
               <th scope="col">TODO</th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            {todos.map((todo) => (
+            {todos.map((todo, index) => ( 
               <tr key={todo.id}>
-                <th>{todo.id}</th>
+                <th>{index + 1}</th> 
                 <td>{todo.todo}</td>
                 <td>
                   <button
